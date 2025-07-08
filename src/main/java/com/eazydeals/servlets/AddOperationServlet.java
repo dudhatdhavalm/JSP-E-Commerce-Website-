@@ -42,15 +42,11 @@ public class AddOperationServlet extends HttpServlet {
 			String path = request.getServletContext().getRealPath("/") + "Product_imgs" + File.separator
 					+ part.getSubmittedFileName();
 
-			try {
-				FileOutputStream fos = new FileOutputStream(path);
-				InputStream is = part.getInputStream();
-				byte[] data = new byte[is.available()];
+			try (FileOutputStream fos = new FileOutputStream(path);
+				 InputStream is = part.getInputStream()) {
+				byte[] data = new byte[is.available()]; // Note: is.available() can be unreliable for large streams.
 				is.read(data);
 				fos.write(data);
-				fos.flush();
-				fos.close();
-
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -83,15 +79,11 @@ public class AddOperationServlet extends HttpServlet {
 
 			String path = request.getServletContext().getRealPath("/") + "Product_imgs" + File.separator
 					+ part.getSubmittedFileName();
-			try {
-				FileOutputStream fos = new FileOutputStream(path);
-				InputStream is = part.getInputStream();
-				byte[] data = new byte[is.available()];
+			try (FileOutputStream fos = new FileOutputStream(path);
+				 InputStream is = part.getInputStream()) {
+				byte[] data = new byte[is.available()]; // Note: is.available() can be unreliable for large streams.
 				is.read(data);
 				fos.write(data);
-				fos.flush();
-				fos.close();
-
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -117,15 +109,11 @@ public class AddOperationServlet extends HttpServlet {
 				catDao.updateCategory(category);
 				String path = request.getServletContext().getRealPath("/") + "Product_imgs" + File.separator
 						+ part.getSubmittedFileName();
-				try {
-					FileOutputStream fos = new FileOutputStream(path);
-					InputStream is = part.getInputStream();
-					byte[] data = new byte[is.available()];
+				try (FileOutputStream fos = new FileOutputStream(path);
+					 InputStream is = part.getInputStream()) {
+					byte[] data = new byte[is.available()]; // Note: is.available() can be unreliable for large streams.
 					is.read(data);
 					fos.write(data);
-					fos.flush();
-					fos.close();
-
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -168,15 +156,11 @@ public class AddOperationServlet extends HttpServlet {
 				// product image upload
 				String path = request.getServletContext().getRealPath("/") + "Product_imgs" + File.separator
 						+ part.getSubmittedFileName();
-				try {
-					FileOutputStream fos = new FileOutputStream(path);
-					InputStream is = part.getInputStream();
-					byte[] data = new byte[is.available()];
+				try (FileOutputStream fos = new FileOutputStream(path);
+					 InputStream is = part.getInputStream()) {
+					byte[] data = new byte[is.available()]; // Note: is.available() can be unreliable for large streams.
 					is.read(data);
 					fos.write(data);
-					fos.flush();
-					fos.close();
-
 				} catch (Exception e) {
 					e.printStackTrace();
 				}

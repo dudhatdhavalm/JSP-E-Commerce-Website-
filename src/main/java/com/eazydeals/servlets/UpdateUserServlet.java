@@ -22,6 +22,10 @@ public class UpdateUserServlet extends HttpServlet {
 		String op = request.getParameter("operation");
 		HttpSession session = request.getSession();
 		User oldUser = (User) session.getAttribute("activeUser");
+		// The ConnectionProvider.getConnection() is called here.
+		// Assuming ConnectionProvider manages the lifecycle of the connection
+		// (e.g., connection pooling) and UserDao handles its usage.
+		// No direct Java 21 specific changes are needed here for compatibility.
 		UserDao userDao = new UserDao(ConnectionProvider.getConnection());
 
 		if (op.trim().equals("changeAddress")) {

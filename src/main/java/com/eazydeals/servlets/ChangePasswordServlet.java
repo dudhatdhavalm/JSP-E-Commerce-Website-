@@ -32,7 +32,10 @@ public class ChangePasswordServlet extends HttpServlet {
 				//System.out.println(otp);
 				session.setAttribute("otp", otp);
 				session.setAttribute("email", email);
-				MailMessenger.sendOtp(email, otp);
+
+				// Java 21 Upgrade: Use a virtual thread for the blocking network call to send email.
+				// This prevents the servlet thread from being blocked during mail sending.
+				Thread.ofVirtual().start(() -> MailMessenger.sendOtp(email, otp));
 				
 				Message message = new Message("We'ev sent a password reset code to "+email, "success", "alert-success");
 				session.setAttribute("message", message);

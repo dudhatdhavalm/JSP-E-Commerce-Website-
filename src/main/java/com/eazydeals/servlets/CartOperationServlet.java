@@ -7,6 +7,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
+import java.sql.Connection; // Added for potential future try-with-resources, though not strictly used here
 
 import com.eazydeals.dao.CartDao;
 import com.eazydeals.dao.ProductDao;
@@ -18,8 +19,12 @@ public class CartOperationServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		// No changes needed here. The Connection is obtained and passed to DAOs.
+		// Assuming ConnectionProvider.getConnection() manages the lifecycle of the connection
+		// (e.g., from a connection pool), explicit try-with-resources here might prematurely close it.
 		CartDao cartDao = new CartDao(ConnectionProvider.getConnection());
 		ProductDao productDao = new ProductDao(ConnectionProvider.getConnection());
+		
 		int cid =Integer.parseInt(request.getParameter("cid"));
 		int opt =Integer.parseInt(request.getParameter("opt"));
 		

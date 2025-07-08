@@ -38,7 +38,9 @@ public class RegisterServlet extends HttpServlet {
 			Message message;
 			if (flag) {
 				message = new Message("Registration Successful !!", "success", "alert-success");
-				MailMessenger.successfullyRegister(userName, userEmail);
+				// Java 21 Upgrade: Offload email sending to a virtual thread to avoid blocking the request thread.
+				// The usage of Thread.startVirtualThread is correct for Java 21.
+				Thread.startVirtualThread(() -> MailMessenger.successfullyRegister(userName, userEmail));
 			} else {
 				message = new Message("Something went wrong! Try again!!", "error", "alert-danger");
 			}
