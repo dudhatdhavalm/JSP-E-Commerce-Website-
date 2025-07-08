@@ -27,7 +27,7 @@ public class Message {
 	}
 
 	public void setMessageType(String messageType) {
-		this.messageType = messageType;
+		this.messageType = message;
 	}
 
 	public String getCssClass() {
